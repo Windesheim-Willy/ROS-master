@@ -1,0 +1,19 @@
+# Main compose file for ROS-master with the container from Dockerhub.
+version: '2.1'
+
+services:
+  ROS-master:
+    image: windesheimwinny/ros-master:latest
+    command: stdbuf -o L roscore
+    networks:
+      - ros
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11311"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+networks:
+  ros:
+    driver: bridge
