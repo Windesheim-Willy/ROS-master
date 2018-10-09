@@ -2,5 +2,5 @@
 version: '2.1'
 
 services:
-  ROS-master:
+  ros-master:
     build: ./docker
