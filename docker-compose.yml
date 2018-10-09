@@ -2,7 +2,7 @@
 version: '2.1'
 
 services:
-  ROS-master:
+  ros-master:
     image: windesheimwinny/ros-master:latest
     command: stdbuf -o L roscore
     networks:
