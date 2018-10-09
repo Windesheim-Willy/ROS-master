@@ -8,11 +8,6 @@ services:
     networks:
       - ros
     restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11311"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
 
 networks:
   ros:
