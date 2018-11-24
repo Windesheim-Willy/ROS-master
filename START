@@ -19,12 +19,6 @@
 # update-rc.d roscore remove
 #
 
-# Author: Daniel Casner <www.danielcasner.org>
-
-
-HOSTNAME=`/bin/hostname`
-PATH=/usr/local/bin:$PATH
-PYTHONPATH=/usr/local/lib/python2.7/site-packages:/usr/local/lib/python:$PYTHONPATH
 DAEMON=/opt/ros/kinetic/bin/roscore
 NAME=roscore
 ROSCORE_LOG=/var/log/roscore.log
@@ -33,8 +27,6 @@ PIDFILE=/var/run/$NAME.pid
 . /opt/ros/kinetic/setup.sh
 date >> $ROSCORE_LOG
 date >> $ROSCORE_ERR
-echo $PATH >> $ROSCORE_LOG
-echo $PYTHONPATH >> $ROSCORE_LOG
 
 
 # Exit if the package is not installed
