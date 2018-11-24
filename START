@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+export PORT=11311
+export ROS_HOME=$HOME/.ros
+
+case "$1" in
+start)
+  roscore
+  ;;
+stop)
+  if [ -e ${ROS_HOME}/roscore-${PORT}.pid ]; then kill `cat  ${ROS_HOME}/roscore-${PORT}.pid`; fi
+  ;;
+restart)
+  $0 stop
+  $0 start
+  ;;
+status)
+  if [ -e ${ROS_HOME}/roscore-${PORT}.pid ]; then
+    echo ros_master is running, pid=`cat ${ROS_HOME}/roscore-${PORT}.pid`
+  else
+    echo ros_master is NOT running
+    exit 1
+  fi
+  ;;
+*)
+  echo "Usage: $0 {start|stop|status|restart}"
+esac
+
+exit 0
