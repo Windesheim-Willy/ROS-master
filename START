@@ -28,7 +28,7 @@ PYTHONPATH=/usr/local/lib/python2.7/site-packages:/usr/local/lib/python:$PYTHONP
 DAEMON=/opt/ros/kinetic/bin/roscore
 NAME=roscore
 ROSCORE_LOG=/var/log/roscore.log
-ROSCORE_ERR=/media/log/roscore.err
+ROSCORE_ERR=/var/log/roscore.err
 PIDFILE=/var/run/$NAME.pid
 . /opt/ros/kinetic/setup.sh
 date >> $ROSCORE_LOG
