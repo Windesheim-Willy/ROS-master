@@ -20,10 +20,14 @@
 #
 
 DAEMON=/opt/ros/kinetic/bin/roscore
+DAEMON_RUN_DISCOVER="/opt/ros/kinetic/bin/rosrun master_discovery_fkie master_discovery"
+DAEMON_RUN_SYNC="/opt/ros/kinetic/bin/rosrun master_sync_fkie master_sync"
 NAME=roscore
 ROSCORE_LOG=/var/log/roscore.log
 ROSCORE_ERR=/var/log/roscore.err
 PIDFILE=/var/run/$NAME.pid
+PIDFILE_DISCOVER=/var/run/$NAME.pid
+PIDFILE_SYNC=/var/run/$NAME.pid
 . /opt/ros/kinetic/setup.sh
 date >> $ROSCORE_LOG
 date >> $ROSCORE_ERR
@@ -52,6 +56,8 @@ do_start() {
     #   1 if daemon was already running
     #   2 if daemon could not be started
     start-stop-daemon --start --pidfile $PIDFILE --make-pidfile --background --exec $DAEMON -- $DAEMON_ARGS 1>> $ROSCORE_LOG 2>>$ROSCORE_ERR </dev/null || return 2
+    start-stop-daemon --start --pidfile $PIDFILE_DISCOVER --make-pidfile --background --exec $DAEMON_RUN_DISCOVER -- $DAEMON_ARGS 1>> $ROSCORE_LOG 2>>$ROSCORE_ERR </dev/null || return 2
+    start-stop-daemon --start --pidfile $PIDFILE_SYNC --make-pidfile --background --exec $DAEMON_RUN_SYNC -- $DAEMON_ARGS 1>> $ROSCORE_LOG 2>>$ROSCORE_ERR </dev/null || return 2
 }
 
 #
@@ -65,6 +71,8 @@ do_stop()
     #   2 if daemon could not be stopped
     #   other if a failure occurred
     start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE
+    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE_DISCOVER
+    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE_SYNC
     RETVAL="$?"
     [ "$RETVAL" = 2 ] && return 2
     # Wait for children to finish too if this is a daemon that forks
@@ -74,6 +82,8 @@ do_stop()
     # needed by services started subsequently.  A last resort is to
     # sleep for some time.
     start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON
+    start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON_RUN_DISCOVER
+    start-stop-daemon --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON_RUN_SYNC
     [ "$?" = 2 ] && return 2
     # Many daemons don't delete their pidfiles when they exit.
     rm -f $PIDFILE
