@@ -44,3 +44,23 @@ rosrun master_discovery_fkie master_discovery >/dev/null 2>&1 &
 rosrun master_sync_fkie master_sync >/dev/null 2>&1 &
 ----
 
+Edit /etc/hostnode:
+----
+Change hostname to brainnode
+----
+edit /etc/hosts:
+----
+add all the hosts of Willy and Skylab. The correct info can be found on SharePoint.
+----
+Install VNC on the node:
+----
+sudo apt-get update
+sudo apt install xfce4 xfce4-goodies tightvncserver
+----
+Add a secure password on VNC with:
+----
+vncserver
+----
+
+Reference for VNC:
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-16-04
