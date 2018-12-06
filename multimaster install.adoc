@@ -21,3 +21,15 @@ To ensure that the startupscripts from the supplier is disabled:
 ----
 sudo systemctl disable magni-base
 ----
+
+Through the GUI WLAN has to be disabled.
+
+The complete environment of ROS with multimaster is included.
+
+The node on Willy will be the ROS master with portnumber 11311, which is the standard setting.
+
+Enable multicast feature on the node:
+edit the /etc/sysctl.conf file and add the following line:
+----
+net.ipv4.icmp_echo_ignore_broadcasts=0
+----
