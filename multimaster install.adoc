@@ -74,5 +74,8 @@ Add a secure password on VNC with:
 vncserver
 ----
 
+export ROS_HOSTNAME=brainnode
+export ROS_MASTER_URI=http://brainnode:11311
+
 Reference for VNC:
 https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-16-04
