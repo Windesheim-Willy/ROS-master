@@ -33,3 +33,14 @@ edit the /etc/sysctl.conf file and add the following line:
 ----
 net.ipv4.icmp_echo_ignore_broadcasts=0
 ----
+The multimaster is activated with:
+----
+rosrun master_discovery_fkie master_discovery >/dev/null 2>&1 &
+rosrun master_sync_fkie master_sync >/dev/null 2>&1 &
+----
+Therefor the startup file of the node is added with:
+----
+rosrun master_discovery_fkie master_discovery >/dev/null 2>&1 &
+rosrun master_sync_fkie master_sync >/dev/null 2>&1 &
+----
+
