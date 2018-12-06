@@ -22,7 +22,19 @@ To ensure that the startupscripts from the supplier is disabled:
 sudo systemctl disable magni-base
 ----
 
+Update and upgrade the OS:
+----
+sudo apt-get update
+sudo apt-get upgrade
+----
+
 Through the GUI WLAN has to be disabled.
+
+Install openssh server and check status:
+----
+sudo apt-get install openssh-server
+sudo service ssh status
+----
 
 The complete environment of ROS with multimaster is included.
 
